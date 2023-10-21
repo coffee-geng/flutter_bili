@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:io';
+import 'package:flutter_bili/widget/navigation_bar.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 //带缓存的image
@@ -45,4 +48,27 @@ blackLinearGradient({bool fromTop = false}) {
         Colors.black12,
         Colors.transparent
       ]);
+}
+
+///修改状态栏
+void changeStatusBar(
+    {color = Colors.white,
+    StatusStyle statusStyle = StatusStyle.DARK_CONTENT,
+    BuildContext? context}) {
+  // 沉浸式状态栏样式
+  // FlutterStatusbarManager.setColor(color, animated: false);
+  // FlutterStatusbarManager.setStyle(statusStyle == StatusStyle.DARK_CONTENT
+  //     ? StatusBarStyle.DARK_CONTENT
+  //     : StatusBarStyle.LIGHT_CONTENT);
+  var brightness = statusStyle == StatusStyle.LIGHT_CONTENT
+      ? Brightness.dark
+      : Brightness.light;
+  var iconBrightness =
+      brightness == Brightness.light ? Brightness.dark : Brightness.light;
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+      statusBarColor:
+          brightness == Brightness.light ? Colors.transparent : color,
+      statusBarBrightness: brightness,
+      statusBarIconBrightness: iconBrightness));
 }

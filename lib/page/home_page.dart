@@ -4,8 +4,11 @@ import 'package:flutter_bili/core/hi_state.dart';
 import 'package:flutter_bili/http/core/hi_error.dart';
 import 'package:flutter_bili/navigator/hi_navigator.dart';
 import 'package:flutter_bili/page/home_tab_page.dart';
+import 'package:flutter_bili/page/profile_page.dart';
+import 'package:flutter_bili/page/video_detail_page.dart';
 import 'package:flutter_bili/utils/color.dart';
 import 'package:flutter_bili/utils/toast.dart';
+import 'package:flutter_bili/utils/view_util.dart';
 import 'package:flutter_bili/widget/loading_container.dart';
 import 'package:flutter_bili/widget/navigation_bar.dart' as nav;
 import 'package:underline_indicator/underline_indicator.dart';
@@ -13,6 +16,7 @@ import 'package:underline_indicator/underline_indicator.dart';
 import '../http/dao/home_dao.dart';
 import '../model/home_mo.dart';
 import '../model/video_model.dart';
+import '../widget/navigation_bar.dart' as nav;
 
 class HomePage extends StatefulWidget {
   final ValueChanged<int>? onJumpTo;
@@ -24,19 +28,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends HiState<HomePage>
-    with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
+    with
+        AutomaticKeepAliveClientMixin,
+        TickerProviderStateMixin,
+        WidgetsBindingObserver {
   late RouteChangeListener listener;
 
   List<CategoryMo> categoryList = [];
   List<BannerMo> bannerList = [];
   late TabController _tabController;
   bool _isLoading = true;
+  Widget? _currentPage;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _tabController = TabController(length: categoryList.length, vsync: this);
     HiNavigator.getInstance().addListener(listener = (current, prev) {
+      _currentPage = current.widget;
       if (widget == current.widget || current.widget is! HomePage) {
         print(
             '页面${(prev != null) ? "从${prev!.widget.toString()}" : ""} 切换到${current.widget.toString()}');
@@ -44,15 +54,45 @@ class _HomePageState extends HiState<HomePage>
           (widget == prev.widget || prev.widget is HomePage)) {
         print('页面${prev.widget.toString()} 被压后台');
       }
+
+      //当页面返回到首页，需恢复首页的状态栏样式
+      //因为ProfilePage要实现沉浸式效果，所以排除
+      if (prev?.widget is VideoDetailPage && current.widget is! ProfilePage) {
+        changeStatusBar(
+            color: Colors.white, statusStyle: nav.StatusStyle.DARK_CONTENT);
+      }
     });
     loadData();
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     HiNavigator.getInstance().removeListener(listener);
     _tabController.dispose();
     super.dispose();
+  }
+
+  ///监听应用生命周期的变化
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    print(':didChangeAppLifecycleState: $state');
+    switch (state) {
+      case AppLifecycleState.inactive: //非激活状态，将要进入到暂停态
+        break;
+      case AppLifecycleState.paused: //暂停态，压后台
+        break;
+      case AppLifecycleState.resumed: //从后台切换到前台
+        //修改Android压后台，状态栏字体颜色变白的问题
+        if (_currentPage is! VideoDetailPage) {
+          changeStatusBar(
+              color: Colors.white, statusStyle: nav.StatusStyle.DARK_CONTENT);
+        }
+        break;
+      case AppLifecycleState.detached: //应用结束，app被销毁
+        break;
+    }
   }
 
   @override

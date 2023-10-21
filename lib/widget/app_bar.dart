@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bili/utils/view_util.dart';
 
 ///自定义顶部appbar
 PreferredSizeWidget appBar(String title,
@@ -23,5 +24,33 @@ PreferredSizeWidget appBar(String title,
             )
           : Container()
     ],
+  );
+}
+
+///视频详情页的appbar
+///当onBack为null时，BackButton会调用其默认的操作Navigator.maybePop(context)
+videoAppBar({VoidCallback? onBack}) {
+  return Container(
+    padding: EdgeInsets.only(right: 8),
+    decoration: BoxDecoration(gradient: blackLinearGradient(fromTop: true)),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        BackButton(
+          onPressed: onBack,
+          color: Colors.white,
+        ),
+        Row(
+          children: [
+            Icon(Icons.live_tv_rounded, color: Colors.white, size: 20),
+            Padding(
+              padding: EdgeInsets.only(left: 12),
+              child:
+                  Icon(Icons.more_vert_rounded, color: Colors.white, size: 20),
+            )
+          ],
+        )
+      ],
+    ),
   );
 }
