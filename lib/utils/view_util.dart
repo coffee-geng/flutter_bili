@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bili/utils/format_util.dart';
 import 'dart:io';
 import 'package:flutter_bili/widget/navigation_bar.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -60,15 +61,40 @@ void changeStatusBar(
   // FlutterStatusbarManager.setStyle(statusStyle == StatusStyle.DARK_CONTENT
   //     ? StatusBarStyle.DARK_CONTENT
   //     : StatusBarStyle.LIGHT_CONTENT);
-  var brightness = statusStyle == StatusStyle.LIGHT_CONTENT
-      ? Brightness.dark
-      : Brightness.light;
-  var iconBrightness =
-      brightness == Brightness.light ? Brightness.dark : Brightness.light;
+  // var brightness = statusStyle == StatusStyle.LIGHT_CONTENT
+  //     ? Brightness.dark
+  //     : Brightness.light;
+  // var iconBrightness =
+  //     brightness == Brightness.light ? Brightness.dark : Brightness.light;
+  //
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+  //     statusBarColor:
+  //         brightness == Brightness.light ? Colors.transparent : color,
+  //     statusBarBrightness: brightness,
+  //     statusBarIconBrightness: iconBrightness));
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.green, statusBarIconBrightness: Brightness.light));
+}
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
-      statusBarColor:
-          brightness == Brightness.light ? Colors.transparent : color,
-      statusBarBrightness: brightness,
-      statusBarIconBrightness: iconBrightness));
+///带文字的小图标
+smallIconText(IconData iconData, text) {
+  var style = TextStyle(fontSize: 12, color: Colors.grey);
+  if (text is int) {
+    text = countFormat(text);
+  }
+  return [
+    Icon(iconData, size: 12, color: Colors.grey),
+    Text('$text', style: style)
+  ];
+}
+
+borderLine(BuildContext context, {bottom = true, top = false}) {
+  BorderSide borderSide = BorderSide(width: 0.5, color: Colors.grey.shade200);
+  return Border(
+      bottom: bottom ? borderSide : BorderSide.none,
+      top: top ? borderSide : BorderSide.none);
+}
+
+SizedBox hiSpace({double height = 1, double width = 1}) {
+  return SizedBox(height: height, width: width);
 }

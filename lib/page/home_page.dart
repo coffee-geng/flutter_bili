@@ -9,6 +9,7 @@ import 'package:flutter_bili/page/video_detail_page.dart';
 import 'package:flutter_bili/utils/color.dart';
 import 'package:flutter_bili/utils/toast.dart';
 import 'package:flutter_bili/utils/view_util.dart';
+import 'package:flutter_bili/widget/hi_tab.dart';
 import 'package:flutter_bili/widget/loading_container.dart';
 import 'package:flutter_bili/widget/navigation_bar.dart' as nav;
 import 'package:underline_indicator/underline_indicator.dart';
@@ -131,28 +132,25 @@ class _HomePageState extends HiState<HomePage>
   bool get wantKeepAlive => true;
 
   Widget _tabBar() {
-    return TabBar(
-      controller: _tabController,
-      tabs: categoryList
-          .map<Tab>(
-            (category) => Tab(
-              child: Padding(
-                padding: EdgeInsets.only(left: 5, right: 5),
-                child: Text(
-                  category.name ?? '',
-                  style: TextStyle(fontSize: 16),
+    return HiTab(
+        tabController: _tabController,
+        tabs: categoryList
+            .map<Tab>(
+              (category) => Tab(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 2, right: 2),
+                  child: Text(
+                    category.name ?? '',
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
               ),
-            ),
-          )
-          .toList(),
-      indicator: UnderlineIndicator(
-          strokeCap: StrokeCap.round,
-          borderSide: BorderSide(color: primary, width: 3),
-          insets: EdgeInsets.only(left: 15, right: 15)),
-      isScrollable: true,
-      labelColor: Colors.black,
-    );
+            )
+            .toList(),
+        fontSize: 16,
+        borderWidth: 3,
+        unselectedLabelColor: Colors.black54,
+        insets: 15);
   }
 
   void loadData() async {
