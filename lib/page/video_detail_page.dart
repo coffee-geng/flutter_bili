@@ -52,7 +52,7 @@ class _VideoDetailPageState extends HiState<VideoDetailPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(toolbarHeight: 1),
+        appBar: AppBar(toolbarHeight: 0),
         body: _videoMo.url != null
             ? Column(
                 children: [

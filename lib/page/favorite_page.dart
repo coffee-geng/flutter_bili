@@ -14,6 +14,7 @@ class _FavoritePageState extends HiState<FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Container(
         child: Text('收藏'),
       ),

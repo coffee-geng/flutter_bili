@@ -111,8 +111,10 @@ class _HomePageState extends HiState<HomePage>
             statusStyle: nav.StatusStyle.DARK_CONTENT,
           ),
           Container(
-            color: Colors.white,
             child: _tabBar(),
+            //decoration和color只能选其一
+            // color: Colors.white,
+            decoration: bottomBoxShadow(),
           ),
           Flexible(
               child: TabBarView(

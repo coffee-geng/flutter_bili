@@ -37,7 +37,7 @@ class VideoLargeCard extends StatelessWidget {
               height: height, width: height * (16 / 9)),
           Positioned(
               bottom: 5,
-              right: 5,
+              right: 15,
               child: Container(
                 padding: EdgeInsets.all(2),
                 decoration: BoxDecoration(
