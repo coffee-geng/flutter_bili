@@ -1,5 +1,7 @@
 import 'package:flutter_bili/http/dao/login_dao.dart';
 
+import '../../utils/hi_constant.dart';
+
 enum HttpMethod { GET, POST, DELETE }
 
 /// 通过抽象类来封装基础请求
@@ -57,10 +59,7 @@ abstract class BaseRequest {
     return this;
   }
 
-  Map<String, dynamic> header = {
-    'course-flag': 'fa',
-    'auth-token': 'ZmEtMjAyMS0wNC0xMiAyMToyMjoyMC1mYQ==fa'
-  };
+  Map<String, dynamic> header = HiConstant.headers();
 
   // 添加header
   BaseRequest addHeader(String k, Object v) {

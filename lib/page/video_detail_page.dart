@@ -1,21 +1,27 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bili/barrage/barrage_switch.dart';
+import 'package:flutter_bili/barrage/hi_barrage.dart';
+import 'package:flutter_bili/barrage/hi_socket.dart';
 import 'dart:io';
 import 'package:flutter_bili/core/hi_state.dart';
 import 'package:flutter_bili/http/core/hi_error.dart';
 import 'package:flutter_bili/http/dao/favorite_dao.dart';
 import 'package:flutter_bili/http/dao/video_detail_dao.dart';
 import 'package:flutter_bili/model/video_detail_mo.dart';
+import 'package:flutter_bili/utils/hi_constant.dart';
 import 'package:flutter_bili/utils/toast.dart';
 import 'package:flutter_bili/utils/view_util.dart';
 import 'package:flutter_bili/widget/app_bar.dart';
+import 'package:flutter_bili/barrage/barrage_input.dart';
 import 'package:flutter_bili/widget/expandable_content.dart';
 import 'package:flutter_bili/widget/video_header.dart';
 import 'package:flutter_bili/widget/video_large_card.dart';
 import 'package:flutter_bili/widget/video_toolbar.dart';
 import 'package:flutter_bili/widget/video_view.dart';
 import 'package:flutter_bili/widget/navigation_bar.dart' as nav;
+import 'package:flutter_overlay/flutter_overlay.dart';
 
 import '../http/dao/like_dao.dart';
 import '../model/video_model.dart';
@@ -38,6 +44,8 @@ class _VideoDetailPageState extends HiState<VideoDetailPage>
   VideoDetailMo? _videoDetailMo;
   late VideoMo _videoMo;
   List<VideoMo> _videoList = [];
+  var barrageKey = GlobalKey<HiBarrageState>();
+  bool _inputPopupShowing = false; //输入弹出框及键盘是否展开
 
   @override
   void initState() {
@@ -50,6 +58,11 @@ class _VideoDetailPageState extends HiState<VideoDetailPage>
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(toolbarHeight: 0),
@@ -57,10 +70,15 @@ class _VideoDetailPageState extends HiState<VideoDetailPage>
             ? Column(
                 children: [
                   VideoView(
-                    url: _videoMo.url!,
-                    cover: _videoMo.cover,
-                    overlayUI: videoAppBar(),
-                  ),
+                      url: _videoMo.url!,
+                      cover: _videoMo.cover,
+                      overlayUI: videoAppBar(),
+                      barrageUI: HiBarrage(
+                          key: barrageKey,
+                          vid: _videoMo.id,
+                          headers: HiConstant.headers(),
+                          top: 10,
+                          autoplay: true)),
                   _buildTabNavigation(),
                   Flexible(
                       child: TabBarView(
@@ -86,16 +104,41 @@ class _VideoDetailPageState extends HiState<VideoDetailPage>
         padding: EdgeInsets.only(left: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _tabBar(),
-            Padding(
-              padding: EdgeInsets.only(right: 20),
-              child: Icon(Icons.live_tv_rounded, color: Colors.grey),
-            )
-          ],
+          children: [_tabBar(), _buildBarrageBtn()],
         ),
       ),
     );
+  }
+
+  _buildBarrageBtn() {
+    return BarrageSwitch(
+        beTyping: _inputPopupShowing,
+        onBarrageInputFocused: () {
+          setState(() {
+            _inputPopupShowing = true;
+          });
+          HiOverlay.show(context,
+              child: BarrageInput(
+                onPopupClose: _onPopupClose,
+              )).then((value) {
+            print('输入框返回的内容：$value');
+            barrageKey.currentState?.send(value ?? '');
+          });
+        },
+        onBarrageSwitch: (open) {
+          //展开或收缩BarrageSwitch组件
+          if (open) {
+            barrageKey.currentState?.play();
+          } else {
+            barrageKey.currentState?.pause();
+          }
+        });
+  }
+
+  void _onPopupClose() {
+    setState(() {
+      _inputPopupShowing = false;
+    });
   }
 
   _tabBar() {

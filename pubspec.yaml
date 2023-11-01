@@ -48,6 +48,8 @@ dependencies:
   video_player: ^2.7.2
   chewie: ^1.7.1
   intl: ^0.18.1
+  web_socket_channel: ^2.4.0
+  flutter_overlay: ^1.0.0
 
 dev_dependencies:
   flutter_test:

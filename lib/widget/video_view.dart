@@ -15,6 +15,7 @@ class VideoView extends StatefulWidget {
   final bool autoPlay;
   final bool loop;
   final Widget? overlayUI;
+  final Widget? barrageUI;
 
   const VideoView(
       {Key? key,
@@ -23,7 +24,8 @@ class VideoView extends StatefulWidget {
       this.cover,
       this.autoPlay = true,
       this.loop = false,
-      this.overlayUI})
+      this.overlayUI,
+      this.barrageUI})
       : super(key: key);
 
   @override
@@ -66,6 +68,7 @@ class _VideoViewState extends State<VideoView> {
           bottomGradient: blackLinearGradient(),
           showOptionsButton: false,
           overlayUI: widget.overlayUI,
+          barrageUI: widget.barrageUI,
         ),
         materialProgressColors: _progressColors);
     _chewieController.addListener(_fullScreenListener);
