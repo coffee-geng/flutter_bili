@@ -7,7 +7,9 @@ import 'package:flutter_bili/utils/toast.dart';
 import 'package:flutter_bili/widget/login_button.dart';
 import 'package:flutter_bili/widget/login_effect.dart';
 import 'package:flutter_bili/widget/login_input.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/theme_provider.dart';
 import '../utils/string_util.dart';
 import '../widget/app_bar.dart';
 import 'login_page.dart';
@@ -54,6 +56,7 @@ class _RegistrationPageState extends HiState<RegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar('注册', rightTitle: '登录', rightButtonClick: () {
+        context.read<ThemeProvider>().setTheme(ThemeMode.light);
         HiNavigator.getInstance().onJumpTo(RouteStatus.login);
       }),
       body: Container(

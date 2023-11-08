@@ -49,7 +49,7 @@ class _RankingPageState extends HiState<RankingPage>
       child: Container(
         alignment: Alignment.center,
         child: _tabBar(),
-        decoration: bottomBoxShadow(),
+        decoration: bottomBoxShadow(context),
       ),
     );
   }

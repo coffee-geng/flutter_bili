@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bili/provider/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../utils/view_util.dart';
 
@@ -61,8 +63,7 @@ class _HiFlexibleHeaderState extends State<HiFlexibleHeader> {
             child: cachedImage(widget.face, width: 46, height: 46),
           ),
           hiSpace(width: 8),
-          Text(widget.name,
-              style: TextStyle(fontSize: 11, color: Colors.black54))
+          Text(widget.name, style: TextStyle(fontSize: 11))
         ],
       ),
     );

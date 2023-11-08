@@ -2,10 +2,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bili/page/profile_page.dart';
+import 'package:flutter_bili/page/video_detail_page.dart';
+import 'package:flutter_bili/provider/theme_provider.dart';
 import 'package:flutter_bili/utils/format_util.dart';
 import 'dart:io';
 import 'package:flutter_bili/widget/navigation_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
+
+import '../navigator/hi_navigator.dart';
+import 'color.dart';
 
 //带缓存的image
 Widget cachedImage(String url, {double? width, double? height, BoxFit? fit}) {
@@ -56,24 +63,36 @@ void changeStatusBar(
     {color = Colors.white,
     StatusStyle statusStyle = StatusStyle.DARK_CONTENT,
     BuildContext? context}) {
+  if (context != null) {
+    var themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    if (themeProvider.isDark()) {
+      color = HiColor.dark_bg;
+      statusStyle = StatusStyle.LIGHT_CONTENT;
+    }
+  }
+  var page = HiNavigator.getInstance().getCurrent()?.widget;
+  //修复android切换profile页面状态栏变白的问题
+  if (page is ProfilePage) {
+    color = Colors.transparent;
+  } else if (page is VideoDetailPage) {
+    color = HiColor.dark_bg;
+    statusStyle = StatusStyle.LIGHT_CONTENT;
+  }
   // 沉浸式状态栏样式
-  // FlutterStatusbarManager.setColor(color, animated: false);
-  // FlutterStatusbarManager.setStyle(statusStyle == StatusStyle.DARK_CONTENT
-  //     ? StatusBarStyle.DARK_CONTENT
-  //     : StatusBarStyle.LIGHT_CONTENT);
-  // var brightness = statusStyle == StatusStyle.LIGHT_CONTENT
-  //     ? Brightness.dark
-  //     : Brightness.light;
-  // var iconBrightness =
-  //     brightness == Brightness.light ? Brightness.dark : Brightness.light;
-  //
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
-  //     statusBarColor:
-  //         brightness == Brightness.light ? Colors.transparent : color,
-  //     statusBarBrightness: brightness,
-  //     statusBarIconBrightness: iconBrightness));
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  //     statusBarColor: Colors.green, statusBarIconBrightness: Brightness.light));
+  var brightness;
+  if (Platform.isIOS) {
+    brightness = statusStyle == StatusStyle.LIGHT_CONTENT
+        ? Brightness.dark
+        : Brightness.light;
+  } else {
+    brightness = statusStyle == StatusStyle.LIGHT_CONTENT
+        ? Brightness.light
+        : Brightness.dark;
+  }
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: brightness,
+      statusBarIconBrightness: brightness));
 }
 
 ///带文字的小图标
@@ -100,7 +119,11 @@ SizedBox hiSpace({double height = 1, double width = 1}) {
 }
 
 ///底部阴影
-BoxDecoration bottomBoxShadow() {
+BoxDecoration? bottomBoxShadow(BuildContext context) {
+  var themeProvider = context.watch<ThemeProvider>();
+  if (themeProvider.isDark()) {
+    return null;
+  }
   return BoxDecoration(color: Colors.white, boxShadow: [
     BoxShadow(
         color: Colors.grey.shade200,

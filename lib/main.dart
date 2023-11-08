@@ -9,15 +9,20 @@ import 'package:flutter_bili/http/request/notice_request.dart';
 import 'package:flutter_bili/http/request/test_request.dart';
 import 'package:flutter_bili/model/video_model.dart';
 import 'package:flutter_bili/navigator/bottom_navigator.dart';
+import 'package:flutter_bili/page/dark_mode_page.dart';
 import 'package:flutter_bili/page/home_page.dart';
 import 'package:flutter_bili/page/login_page.dart';
+import 'package:flutter_bili/page/notice_page.dart';
 import 'package:flutter_bili/page/registration_page.dart';
 import 'package:flutter_bili/page/video_detail_page.dart';
+import 'package:flutter_bili/provider/hi_provider.dart';
+import 'package:flutter_bili/provider/theme_provider.dart';
 import 'package:flutter_bili/utils/color.dart';
 import 'package:flutter_bili/utils/toast.dart';
 
 import 'model/result.dart';
 import 'navigator/hi_navigator.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const BiliApp());
@@ -42,20 +47,27 @@ class _BiliAppState extends State<BiliApp> {
               ? Router(routerDelegate: _routerDelegate)
               : const Scaffold(
                   body: Center(child: CircularProgressIndicator()));
-          return MaterialApp(
-            home: widget,
-            theme: ThemeData(primarySwatch: white),
-          );
+          return MultiProvider(
+              providers: topProviders,
+              child: Consumer<ThemeProvider>(builder: (BuildContext context,
+                  ThemeProvider themeProvider, Widget? child) {
+                return MaterialApp(
+                  home: widget,
+                  theme: themeProvider.getTheme(),
+                  darkTheme: themeProvider.getTheme(isDarkMode: true),
+                  themeMode: themeProvider.getThemeMode(),
+                );
+              }));
         });
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return MaterialApp(
-  //     home: widget,
-  //     theme: ThemeData(primarySwatch: white),
-  //   );
-  // }
+// @override
+// Widget build(BuildContext context) {
+//   return MaterialApp(
+//     home: widget,
+//     theme: ThemeData(primarySwatch: white),
+//   );
+// }
 }
 
 class BiliRoutePath {
@@ -122,6 +134,10 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
       page = pageWrap(BottomNavigator());
     } else if (routeStatus == RouteStatus.detail) {
       page = pageWrap(VideoDetailPage(_videoModel!));
+    } else if (routeStatus == RouteStatus.notice) {
+      page = pageWrap(NoticePage());
+    } else if (routeStatus == RouteStatus.dark_mode) {
+      page = pageWrap(DarkModePage());
     }
     if (page != null) {
       tempPages = [...tempPages, page];

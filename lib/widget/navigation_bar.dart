@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bili/provider/theme_provider.dart';
 import 'package:flutter_bili/utils/view_util.dart';
+import 'package:provider/provider.dart';
+
+import '../utils/color.dart';
 
 enum StatusStyle { DARK_CONTENT, LIGHT_CONTENT }
 
@@ -24,14 +28,26 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
+  late StatusStyle _statusStyle;
+  late Color _color;
+
   @override
   void initState() {
     super.initState();
-    _statusBarInit();
+    _color = widget.color;
+    _statusStyle = widget.statusStyle;
   }
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = context.watch<ThemeProvider>();
+    if (themeProvider.isDark()) {
+      _color = HiColor.dark_bg;
+      _statusStyle = StatusStyle.LIGHT_CONTENT;
+    } else {
+      _color = widget.color;
+      _statusStyle = StatusStyle.DARK_CONTENT;
+    }
     _statusBarInit();
 
     final top = MediaQuery.of(context).padding.top;
@@ -39,12 +55,12 @@ class _NavigationBarState extends State<NavigationBar> {
       width: MediaQuery.of(context).size.width,
       height: top + widget.height,
       padding: EdgeInsets.only(top: top),
-      decoration: BoxDecoration(color: widget.color),
+      decoration: BoxDecoration(color: _color),
       child: widget.child,
     );
   }
 
   void _statusBarInit() {
-    changeStatusBar(color: widget.color, statusStyle: widget.statusStyle);
+    changeStatusBar(color: _color, statusStyle: _statusStyle);
   }
 }

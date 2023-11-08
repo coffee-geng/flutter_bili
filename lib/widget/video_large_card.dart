@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bili/model/video_model.dart';
 import 'package:flutter_bili/navigator/hi_navigator.dart';
+import 'package:flutter_bili/provider/theme_provider.dart';
 import 'package:flutter_bili/utils/format_util.dart';
 import 'package:flutter_bili/utils/view_util.dart';
+import 'package:provider/provider.dart';
 
 class VideoLargeCard extends StatelessWidget {
   final VideoMo videoModel;
@@ -12,6 +14,7 @@ class VideoLargeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = context.watch<ThemeProvider>();
     return GestureDetector(
       onTap: () {
         HiNavigator.getInstance()
@@ -22,7 +25,8 @@ class VideoLargeCard extends StatelessWidget {
         padding: EdgeInsets.only(bottom: 6),
         height: 106,
         decoration: BoxDecoration(border: borderLine(context)),
-        child: Row(children: [_itemImage(context), _buildContent()]),
+        child:
+            Row(children: [_itemImage(context), _buildContent(themeProvider)]),
       ),
     );
   }
@@ -51,7 +55,8 @@ class VideoLargeCard extends StatelessWidget {
     );
   }
 
-  _buildContent() {
+  _buildContent(ThemeProvider themeProvider) {
+    var textColor = themeProvider.isDark() ? Colors.grey : Colors.black87;
     return Expanded(
         child: Container(
       padding: EdgeInsets.only(top: 5, left: 8, bottom: 5),
@@ -60,7 +65,7 @@ class VideoLargeCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(videoModel.title,
-              style: TextStyle(fontSize: 12, color: Colors.black87)),
+              style: TextStyle(fontSize: 12, color: textColor)),
           _buildBottomContent()
         ],
       ),

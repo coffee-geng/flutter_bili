@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bili/navigator/bottom_navigator.dart';
+import 'package:flutter_bili/page/dark_mode_page.dart';
 import 'package:flutter_bili/page/home_page.dart';
 import 'package:flutter_bili/page/login_page.dart';
+import 'package:flutter_bili/page/notice_page.dart';
 import 'package:flutter_bili/page/registration_page.dart';
 import 'package:flutter_bili/page/video_detail_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 ///创建页面
 pageWrap(Widget widget) {
@@ -12,7 +15,15 @@ pageWrap(Widget widget) {
 }
 
 //自定义路由封装，路由状态
-enum RouteStatus { login, registration, home, detail, unknown }
+enum RouteStatus {
+  login,
+  registration,
+  home,
+  detail,
+  notice,
+  dark_mode,
+  unknown
+}
 
 //建立路由状态与路由配置页面的对应关系
 RouteStatus getRouteStatus(MaterialPage page) {
@@ -26,6 +37,10 @@ RouteStatus getRouteStatus(MaterialPage page) {
     return RouteStatus.home;
   } else if (page.child is VideoDetailPage) {
     return RouteStatus.detail;
+  } else if (page.child is NoticePage) {
+    return RouteStatus.notice;
+  } else if (page.child is DarkModePage) {
+    return RouteStatus.dark_mode;
   } else {
     return RouteStatus.unknown;
   }
@@ -62,6 +77,10 @@ class HiNavigator extends _RouteJumpListener {
       _instance = HiNavigator._();
     }
     return _instance!;
+  }
+
+  RouteStatusInfo? getCurrent() {
+    return _currentRouteStatusInfo;
   }
 
   RouteJumpListener? _routeJumpListener;
@@ -130,6 +149,23 @@ class HiNavigator extends _RouteJumpListener {
     var newRouteInfo = RouteStatusInfo(RouteStatus.home, widget);
     _notifyRouteChanges(newRouteInfo, _currentRouteFromBottomTab);
     _currentRouteFromBottomTab = newRouteInfo;
+  }
+
+  Future<bool> openH5(String url) async {
+    if (url.isEmpty) {
+      return Future.value(false);
+    }
+    try {
+      Uri uri = Uri.parse(url);
+      var result = await canLaunchUrl(uri);
+      if (result) {
+        return await launchUrl(uri);
+      } else {
+        return Future.value(false);
+      }
+    } on FormatException catch (e) {
+      return Future.value(false);
+    }
   }
 }
 

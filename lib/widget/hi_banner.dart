@@ -66,6 +66,7 @@ class HiBanner extends StatelessWidget {
           args: {'videoMo': VideoMo(vid: bannerMo.url)});
     } else {
       print('type: ${bannerMo.type} ,url: ${bannerMo.url}');
+      HiNavigator.getInstance().openH5(bannerMo.url);
     }
   }
 }

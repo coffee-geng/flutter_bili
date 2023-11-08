@@ -6,6 +6,8 @@ class HiConstant {
   static const courseFlagK = 'course-flag';
   static const courseFlagV = 'fa';
 
+  static const theme = 'hi_theme';
+
   static headers() {
     ///设置请求头校验，注意留意：Console的log输出：flutter: received:
     Map<String, dynamic> header = {

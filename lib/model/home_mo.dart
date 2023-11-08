@@ -56,10 +56,10 @@ class BannerMo {
     id = json['id'];
     sticky = json['sticky'];
     type = json['type'];
-    title = json['title'];
-    subtitle = json['subtitle'];
-    url = json['url'];
-    cover = json['cover'];
+    title = json['title'] ?? '';
+    subtitle = json['subtitle'] ?? '';
+    url = json['url'] ?? '';
+    cover = json['cover'] ?? '';
     createTime = json['createTime'];
   }
 

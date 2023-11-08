@@ -2,14 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bili/core/hi_state.dart';
 import 'package:flutter_bili/http/dao/profile_dao.dart';
+import 'package:flutter_bili/provider/theme_provider.dart';
 import 'package:flutter_bili/utils/view_util.dart';
 import 'package:flutter_bili/widget/benefit_card.dart';
 import 'package:flutter_bili/widget/course_card.dart';
 import 'package:flutter_bili/widget/hi_banner.dart';
+import 'package:provider/provider.dart';
 
 import '../http/core/hi_error.dart';
 import '../model/profile_mo.dart';
+import '../utils/color.dart';
 import '../utils/toast.dart';
+import '../widget/dark_mode_item.dart';
 import '../widget/hi_blur.dart';
 import '../widget/hi_flexible_header.dart';
 
@@ -38,7 +42,7 @@ class _ProfilePageState extends HiState<ProfilePage>
             controller: _scrollController,
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[_buildAppBar()];
+              return <Widget>[_buildAppBar(context)];
             },
             body: ListView(
               padding: EdgeInsets.only(top: 10),
@@ -71,11 +75,15 @@ class _ProfilePageState extends HiState<ProfilePage>
         scrollController: _scrollController);
   }
 
-  _buildAppBar() {
+  _buildAppBar(BuildContext context) {
+    var themeProvider = context.watch<ThemeProvider>();
+    var backgroundColor =
+        themeProvider.isDark() ? HiColor.dark_bg : Colors.white;
     return SliverAppBar(
       expandedHeight: 160,
       //标题栏是否固定，当设置为false时，向上滚动屏幕会将标题栏移出屏幕之外
       pinned: true,
+      backgroundColor: backgroundColor,
       //定义滚动的空间，即放置滚动组件标题栏及其背景组件的地方
       flexibleSpace: FlexibleSpaceBar(
         collapseMode:
@@ -128,7 +136,8 @@ class _ProfilePageState extends HiState<ProfilePage>
     return [
       _buildBanner(_profileMo!),
       CourseCard(courseList: _profileMo!.courseList ?? []),
-      BenefitCard(benefitList: _profileMo!.benefitList ?? [])
+      BenefitCard(benefitList: _profileMo!.benefitList ?? []),
+      DarkModeItem()
     ];
   }
 

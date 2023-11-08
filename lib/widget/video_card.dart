@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bili/model/video_model.dart';
 import 'package:flutter_bili/navigator/hi_navigator.dart';
+import 'package:flutter_bili/provider/theme_provider.dart';
 import 'package:flutter_bili/utils/format_util.dart';
 import 'package:flutter_bili/utils/view_util.dart';
+import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class VideoCard extends StatelessWidget {
@@ -24,6 +26,8 @@ class VideoCard extends StatelessWidget {
   }
 
   _itemCard(BuildContext context) {
+    var themeProvider = context.watch<ThemeProvider>();
+    Color textColor = themeProvider.isDark() ? Colors.white70 : Colors.black87;
     return SizedBox(
         height: 200,
         child: Card(
@@ -36,7 +40,7 @@ class VideoCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   if (videoModel != null) _itemImage(videoModel!, context),
-                  if (videoModel != null) _infoText(videoModel!)
+                  if (videoModel != null) _infoText(videoModel!, textColor)
                 ],
               ),
             )));
@@ -98,7 +102,7 @@ class VideoCard extends StatelessWidget {
     );
   }
 
-  _infoText(VideoMo videoMo) {
+  _infoText(VideoMo videoMo, Color textColor) {
     return SizedBox(
         height: 70,
         child: Container(
@@ -111,13 +115,13 @@ class VideoCard extends StatelessWidget {
                 Text(videoMo.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Colors.black87, fontSize: 12)),
-                _owner(videoMo.owner)
+                    style: TextStyle(color: textColor, fontSize: 12)),
+                _owner(videoMo.owner, textColor)
               ],
             )));
   }
 
-  _owner(Owner owner) {
+  _owner(Owner owner, Color textColor) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -130,7 +134,7 @@ class VideoCard extends StatelessWidget {
             Padding(
                 padding: EdgeInsets.only(left: 8),
                 child: Text(owner.name,
-                    style: TextStyle(fontSize: 11, color: Colors.black87)))
+                    style: TextStyle(fontSize: 11, color: textColor)))
           ],
         ),
         Icon(Icons.more_vert_sharp, size: 15, color: Colors.grey)

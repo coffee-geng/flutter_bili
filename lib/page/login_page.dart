@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bili/core/hi_state.dart';
 import 'package:flutter_bili/navigator/hi_navigator.dart';
+import 'package:flutter_bili/provider/theme_provider.dart';
 import 'package:flutter_bili/widget/app_bar.dart';
 import 'package:flutter_bili/widget/login_button.dart';
 import 'package:flutter_bili/widget/login_effect.dart';
 import 'package:flutter_bili/widget/login_input.dart';
+import 'package:provider/provider.dart';
 
 import '../http/core/hi_error.dart';
 import '../http/dao/login_dao.dart';
@@ -51,6 +53,7 @@ class _LoginPageState extends HiState<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar('密码登录', rightTitle: '注册', rightButtonClick: () {
+        context.read<ThemeProvider>().setTheme(ThemeMode.dark);
         HiNavigator.getInstance().onJumpTo(RouteStatus.registration);
       }),
       body: Container(

@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bili/provider/theme_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:underline_indicator/underline_indicator.dart';
 
 import '../utils/color.dart';
+import 'package:provider/provider.dart';
 
 class HiTab extends StatelessWidget {
   final List<Widget> tabs;
@@ -24,6 +27,9 @@ class HiTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = context.watch<ThemeProvider>();
+    var _unselectedLableColor =
+        themeProvider.isDark() ? Colors.white70 : unselectedLabelColor;
     return TabBar(
       controller: tabController,
       tabs: tabs,
@@ -33,7 +39,7 @@ class HiTab extends StatelessWidget {
           insets: EdgeInsets.only(left: insets, right: insets)),
       isScrollable: true,
       labelColor: primary,
-      unselectedLabelColor: unselectedLabelColor,
+      unselectedLabelColor: _unselectedLableColor,
       labelStyle: TextStyle(fontSize: fontSize),
     );
   }

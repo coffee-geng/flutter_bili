@@ -6,12 +6,14 @@ import 'package:flutter_bili/navigator/hi_navigator.dart';
 import 'package:flutter_bili/page/home_tab_page.dart';
 import 'package:flutter_bili/page/profile_page.dart';
 import 'package:flutter_bili/page/video_detail_page.dart';
+import 'package:flutter_bili/provider/theme_provider.dart';
 import 'package:flutter_bili/utils/color.dart';
 import 'package:flutter_bili/utils/toast.dart';
 import 'package:flutter_bili/utils/view_util.dart';
 import 'package:flutter_bili/widget/hi_tab.dart';
 import 'package:flutter_bili/widget/loading_container.dart';
 import 'package:flutter_bili/widget/navigation_bar.dart' as nav;
+import 'package:provider/provider.dart';
 import 'package:underline_indicator/underline_indicator.dart';
 
 import '../http/dao/home_dao.dart';
@@ -68,9 +70,9 @@ class _HomePageState extends HiState<HomePage>
 
   @override
   void dispose() {
+    _tabController?.dispose();
     WidgetsBinding.instance.removeObserver(this);
     HiNavigator.getInstance().removeListener(listener);
-    _tabController.dispose();
     super.dispose();
   }
 
@@ -88,12 +90,22 @@ class _HomePageState extends HiState<HomePage>
         //修改Android压后台，状态栏字体颜色变白的问题
         if (_currentPage is! VideoDetailPage) {
           changeStatusBar(
-              color: Colors.white, statusStyle: nav.StatusStyle.DARK_CONTENT);
+              color: Colors.white,
+              statusStyle: nav.StatusStyle.DARK_CONTENT,
+              context: context);
         }
         break;
       case AppLifecycleState.detached: //应用结束，app被销毁
         break;
     }
+  }
+
+  ///监听系统dark mode的变化
+  @override
+  void didChangePlatformBrightness() {
+    super.didChangePlatformBrightness();
+    var themeProvider = context.read<ThemeProvider>();
+    themeProvider.darkModeChange();
   }
 
   @override
@@ -114,7 +126,7 @@ class _HomePageState extends HiState<HomePage>
             child: _tabBar(),
             //decoration和color只能选其一
             // color: Colors.white,
-            decoration: bottomBoxShadow(),
+            decoration: bottomBoxShadow(context),
           ),
           Flexible(
               child: TabBarView(
@@ -222,9 +234,14 @@ class _HomePageState extends HiState<HomePage>
             ),
           )),
           Icon(Icons.explore_outlined, color: Colors.grey),
-          Padding(
-              padding: EdgeInsets.only(left: 12),
-              child: Icon(Icons.mail_outline, color: Colors.grey))
+          InkWell(
+            onTap: () {
+              HiNavigator.getInstance().onJumpTo(RouteStatus.notice);
+            },
+            child: Padding(
+                padding: EdgeInsets.only(left: 12),
+                child: Icon(Icons.mail_outline, color: Colors.grey)),
+          )
         ],
       ),
     );

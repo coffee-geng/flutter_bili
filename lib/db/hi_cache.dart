@@ -3,7 +3,7 @@ import 'dart:ffi';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HiCache {
-  late SharedPreferences _prefs;
+  SharedPreferences? _prefs;
 
   HiCache._() {
     _init();
@@ -37,31 +37,31 @@ class HiCache {
   }
 
   setString(String key, String value) {
-    _prefs.setString(key, value);
+    _prefs?.setString(key, value);
   }
 
   setDouble(String key, double value) {
-    _prefs.setDouble(key, value);
+    _prefs?.setDouble(key, value);
   }
 
   setInt(String key, int value) {
-    _prefs.setInt(key, value);
+    _prefs?.setInt(key, value);
   }
 
   setBool(String key, bool value) {
-    _prefs.setBool(key, value);
+    _prefs?.setBool(key, value);
   }
 
   setStringList(String key, List<String> value) {
-    _prefs.setStringList(key, value);
+    _prefs?.setStringList(key, value);
   }
 
   remove(String key) {
-    _prefs.remove(key);
+    _prefs?.remove(key);
   }
 
   T? get<T>(String key) {
-    var result = _prefs.get(key);
+    var result = _prefs?.get(key);
     if (result != null) {
       return result as T;
     }

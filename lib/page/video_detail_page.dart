@@ -25,6 +25,7 @@ import 'package:flutter_overlay/flutter_overlay.dart';
 
 import '../http/dao/like_dao.dart';
 import '../model/video_model.dart';
+import '../utils/color.dart';
 import '../widget/hi_tab.dart';
 
 class VideoDetailPage extends StatefulWidget {
@@ -51,6 +52,7 @@ class _VideoDetailPageState extends HiState<VideoDetailPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: _tabs.length, vsync: this);
+    //黑色状态栏，仅Android
     changeStatusBar(
         color: Colors.black, statusStyle: nav.StatusStyle.LIGHT_CONTENT);
     _videoMo = widget.videoModel;
@@ -59,13 +61,14 @@ class _VideoDetailPageState extends HiState<VideoDetailPage>
 
   @override
   void dispose() {
+    _tabController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(toolbarHeight: 0),
+        appBar: AppBar(toolbarHeight: 0, backgroundColor: HiColor.dark_bg),
         body: _videoMo.url != null
             ? Column(
                 children: [
@@ -96,12 +99,14 @@ class _VideoDetailPageState extends HiState<VideoDetailPage>
   }
 
   _buildTabNavigation() {
+    //使用Material实现阴影效果
     return Material(
       elevation: 5,
       shadowColor: Colors.grey[100],
       child: Container(
         alignment: Alignment.centerLeft,
         padding: EdgeInsets.only(left: 20),
+        height: 39,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [_tabBar(), _buildBarrageBtn()],
