@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bili/core/hi_state.dart';
@@ -233,7 +235,12 @@ class _HomePageState extends HiState<HomePage>
               ),
             ),
           )),
-          Icon(Icons.explore_outlined, color: Colors.grey),
+          InkWell(
+            onTap: () {
+              _mockCrash();
+            },
+            child: Icon(Icons.explore_outlined, color: Colors.grey),
+          ),
           InkWell(
             onTap: () {
               HiNavigator.getInstance().onJumpTo(RouteStatus.notice);
@@ -245,5 +252,45 @@ class _HomePageState extends HiState<HomePage>
         ],
       ),
     );
+  }
+
+  void _mockCrash() async {
+    // try {
+    //   throw StateError('This is a dart exception.');
+    // } catch (e) {
+    //   print(e);
+    // }
+
+    // //使用catchError捕获异步异常
+    // Future.delayed(Duration(seconds: 1)).then((value) {
+    //   print('//使用catchError捕获异步异常');
+    //   throw StateError('This is an async dart exception in Future.');
+    // }).catchError((e) => print(e));
+    //
+    // try {
+    //   await Future.delayed(Duration(seconds: 1))
+    //       .then((value) => throw StateError(
+    //           'This is another async dart exception in Future.'))
+    //       .catchError((e) => print('catchError: $e'));
+    // } catch (e) {
+    //   print('转成同步,捕获异常: $e');
+    // }
+    //
+    // runZonedGuarded(() {
+    //   throw StateError('runZonedGuarded: This is a dart exception.');
+    // }, (error, stack) {
+    //   print('error: $error');
+    // });
+    //
+    // runZonedGuarded(() async {
+    //   await Future.delayed(Duration(seconds: 1))
+    //       .then((value) => throw StateError(
+    //           'runZonedGuarded: This is another async dart exception in Future.'))
+    //       .catchError((e) => print('catchError: $e'));
+    // }, (error, stack) {
+    //   print('runZonedGuarded: async error: $error');
+    // });
+
+    throw StateError('main: This is a second Dart exception in Furtue.');
   }
 }

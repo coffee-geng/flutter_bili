@@ -52,7 +52,8 @@ class _LoginPageState extends HiState<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar('密码登录', rightTitle: '注册', rightButtonClick: () {
+      appBar: appBar('密码登录', rightTitle: '注册', key: Key('registration'),
+          rightButtonClick: () {
         context.read<ThemeProvider>().setTheme(ThemeMode.dark);
         HiNavigator.getInstance().onJumpTo(RouteStatus.registration);
       }),

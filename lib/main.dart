@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_bili/page/video_detail_page.dart';
 import 'package:flutter_bili/provider/hi_provider.dart';
 import 'package:flutter_bili/provider/theme_provider.dart';
 import 'package:flutter_bili/utils/color.dart';
+import 'package:flutter_bili/utils/hi_defend.dart';
 import 'package:flutter_bili/utils/toast.dart';
 
 import 'model/result.dart';
@@ -25,7 +27,7 @@ import 'navigator/hi_navigator.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const BiliApp());
+  HiDefend().run(BiliApp());
 }
 
 class BiliApp extends StatefulWidget {

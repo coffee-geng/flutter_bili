@@ -4,7 +4,7 @@ import 'package:flutter_bili/utils/view_util.dart';
 
 ///自定义顶部appbar
 PreferredSizeWidget appBar(String title,
-    {String? rightTitle, VoidCallback? rightButtonClick}) {
+    {String? rightTitle, VoidCallback? rightButtonClick, Key? key}) {
   return AppBar(
     centerTitle: false,
     titleSpacing: 0,
@@ -13,6 +13,7 @@ PreferredSizeWidget appBar(String title,
     actions: [
       rightTitle != null
           ? InkWell(
+              key: key,
               onTap: rightButtonClick,
               child: Container(
                 padding: EdgeInsets.only(left: 15, right: 15),
