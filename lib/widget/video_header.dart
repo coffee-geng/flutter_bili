@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bili/model/video_model.dart';
-import 'package:flutter_bili/utils/format_util.dart';
-import '../utils/color.dart';
+import 'package:hi_base/format_util.dart';
+import 'package:hi_base/color.dart';
 
 class VideoHeader extends StatelessWidget {
   final Owner owner;

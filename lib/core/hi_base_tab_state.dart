@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bili/core/hi_state.dart';
-
-import '../http/core/hi_error.dart';
-import '../utils/color.dart';
+import 'package:hi_base/hi_state.dart';
+import 'package:hi_net/core/hi_error.dart';
+import 'package:hi_base/color.dart';
 import '../utils/toast.dart';
 
 abstract class HiBaseTabState<T extends StatefulWidget, R, S> extends HiState<T>

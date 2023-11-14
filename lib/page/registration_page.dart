@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bili/core/hi_state.dart';
-import 'package:flutter_bili/http/core/hi_error.dart';
+import 'package:hi_base/hi_state.dart';
 import 'package:flutter_bili/http/dao/login_dao.dart';
 import 'package:flutter_bili/navigator/hi_navigator.dart';
 import 'package:flutter_bili/utils/toast.dart';
 import 'package:flutter_bili/widget/login_button.dart';
 import 'package:flutter_bili/widget/login_effect.dart';
 import 'package:flutter_bili/widget/login_input.dart';
+import 'package:hi_net/core/hi_error.dart';
 import 'package:provider/provider.dart';
-
 import '../provider/theme_provider.dart';
-import '../utils/string_util.dart';
+import 'package:hi_base/string_util.dart';
 import '../widget/app_bar.dart';
-import 'login_page.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);

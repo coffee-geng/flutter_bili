@@ -30,14 +30,22 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  #组件化配置
+  hi_net:
+    path: ./component/hi_net
+  hi_barrage:
+    path: ./component/hi_barrage
+  hi_base:
+    path: ./component/hi_base
+  hi_cache:
+    path: ./component/hi_cache
+  hi_video:
+    path: ./component/hi_video
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  dio: ^5.3.3
   json_annotation: ^4.8.1
-  http: ^1.1.0
-  shared_preferences: ^2.2.1
   fluttertoast: ^8.0.2
   underline_indicator: ^0.0.4
   flutter_swiper_null_safety: ^1.0.2
@@ -45,10 +53,6 @@ dependencies:
   transparent_image: ^2.0.1
   cached_network_image: ^3.3.0
   lottie: ^2.6.0
-  video_player: ^2.7.2
-  chewie: ^1.7.1
-  intl: ^0.18.1
-  web_socket_channel: ^2.4.0
   flutter_overlay: ^1.0.0
   provider: ^6.0.5
   url_launcher: ^6.1.14

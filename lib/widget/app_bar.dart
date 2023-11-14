@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bili/utils/view_util.dart';
+import 'package:hi_base/view_util.dart';
 
 ///自定义顶部appbar
 PreferredSizeWidget appBar(String title,

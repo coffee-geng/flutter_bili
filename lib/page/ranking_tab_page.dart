@@ -3,7 +3,6 @@ import 'package:flutter_bili/core/hi_base_tab_state.dart';
 import 'package:flutter_bili/http/dao/ranking_dao.dart';
 import 'package:flutter_bili/model/ranking_mo.dart';
 import 'package:flutter_bili/widget/video_large_card.dart';
-
 import '../model/video_model.dart';
 
 class RankingTabPage extends StatefulWidget {

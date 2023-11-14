@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bili/utils/color.dart';
+import 'package:hi_base/color.dart';
 
 class BarrageSwitch extends StatefulWidget {
   //初始化时是否展开

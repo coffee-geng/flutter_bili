@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bili/model/video_model.dart';
 import 'package:flutter_bili/navigator/hi_navigator.dart';
 import 'package:flutter_bili/provider/theme_provider.dart';
-import 'package:flutter_bili/utils/format_util.dart';
+import 'package:hi_base/format_util.dart';
 import 'package:flutter_bili/utils/view_util.dart';
+import 'package:hi_base/view_util.dart';
 import 'package:provider/provider.dart';
 
 class VideoLargeCard extends StatelessWidget {

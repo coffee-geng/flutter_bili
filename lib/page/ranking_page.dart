@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bili/core/hi_state.dart';
+import 'package:hi_base/hi_state.dart';
 import 'package:flutter_bili/http/dao/ranking_dao.dart';
 import 'package:flutter_bili/page/ranking_tab_page.dart';
 import 'package:flutter_bili/utils/view_util.dart';
 import 'package:flutter_bili/widget/hi_tab.dart';
 import 'package:flutter_bili/widget/navigation_bar.dart' as nav;
-import '../http/core/hi_error.dart';
+import 'package:hi_net/core/hi_error.dart';
 import '../utils/toast.dart';
 
 class RankingPage extends StatefulWidget {

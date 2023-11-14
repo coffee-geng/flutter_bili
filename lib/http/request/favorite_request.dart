@@ -1,4 +1,5 @@
-import 'package:flutter_bili/http/request/base_request.dart';
+import 'package:hi_net/request/hi_base_request.dart';
+import 'base_request.dart';
 
 class FavoriteRequest extends BaseRequest {
   @override
@@ -21,5 +22,22 @@ class CancelFavoriteRequest extends FavoriteRequest {
   @override
   HttpMethod httpMethod() {
     return HttpMethod.DELETE;
+  }
+}
+
+class FavoriteListRequest extends BaseRequest {
+  @override
+  HttpMethod httpMethod() {
+    return HttpMethod.GET;
+  }
+
+  @override
+  bool needLogin() {
+    return true;
+  }
+
+  @override
+  String path() {
+    return 'uapi/fa/favorites';
   }
 }

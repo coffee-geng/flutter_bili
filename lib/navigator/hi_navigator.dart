@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bili/navigator/bottom_navigator.dart';
 import 'package:flutter_bili/page/dark_mode_page.dart';
-import 'package:flutter_bili/page/home_page.dart';
 import 'package:flutter_bili/page/login_page.dart';
 import 'package:flutter_bili/page/notice_page.dart';
 import 'package:flutter_bili/page/registration_page.dart';

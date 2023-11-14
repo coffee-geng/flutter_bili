@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bili/model/video_detail_mo.dart';
 import 'package:flutter_bili/model/video_model.dart';
-import 'package:flutter_bili/utils/color.dart';
-import 'package:flutter_bili/utils/format_util.dart';
+import 'package:hi_base/color.dart';
+import 'package:hi_base/format_util.dart';
 import 'package:flutter_bili/utils/view_util.dart';
+import 'package:hi_base/view_util.dart';
 
 class VideoToolbar extends StatelessWidget {
   final VideoDetailMo? videoDetailMo;

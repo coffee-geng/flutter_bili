@@ -1,10 +1,8 @@
-import 'package:flutter_bili/db/hi_cache.dart';
-import 'package:flutter_bili/http/core/hi_error.dart';
-import 'package:flutter_bili/http/core/hi_net.dart';
-import 'package:flutter_bili/http/core/hi_net_adapter.dart';
-import 'package:flutter_bili/http/request/base_request.dart';
 import 'package:flutter_bili/http/request/login_request.dart';
 import 'package:flutter_bili/http/request/registration_request.dart';
+import 'package:hi_cache/hi_cache.dart';
+import 'package:hi_net/hi_net.dart';
+import 'package:hi_net/request/hi_base_request.dart';
 
 class LoginDao {
   static const BOARDING_PASS = "boarding-pass";
@@ -20,7 +18,7 @@ class LoginDao {
 
   static _send(String userName, String password,
       {String? imoocId, String? orderId}) async {
-    BaseRequest request;
+    HiBaseRequest request;
     if (imoocId != null && orderId != null) {
       request = RegistrationRequest();
     } else {

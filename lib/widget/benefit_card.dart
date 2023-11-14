@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bili/utils/view_util.dart';
 import 'package:flutter_bili/widget/hi_blur.dart';
+import 'package:hi_base/view_util.dart';
 
 import '../model/profile_mo.dart';
 

@@ -1,5 +1,5 @@
-import 'package:flutter_bili/db/hi_cache.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hi_cache/hi_cache.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ///单元测试

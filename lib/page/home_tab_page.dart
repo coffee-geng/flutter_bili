@@ -1,15 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bili/core/hi_base_tab_state.dart';
-import 'package:flutter_bili/core/hi_state.dart';
 import 'package:flutter_bili/widget/hi_banner.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import '../http/core/hi_error.dart';
 import '../http/dao/home_dao.dart';
 import '../model/home_mo.dart';
 import '../model/video_model.dart';
-import '../utils/color.dart';
-import '../utils/toast.dart';
 import '../widget/video_card.dart';
 
 class HomeTabPage extends StatefulWidget {

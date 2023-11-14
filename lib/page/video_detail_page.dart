@@ -1,12 +1,7 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bili/barrage/barrage_switch.dart';
-import 'package:flutter_bili/barrage/hi_barrage.dart';
-import 'package:flutter_bili/barrage/hi_socket.dart';
-import 'dart:io';
-import 'package:flutter_bili/core/hi_state.dart';
-import 'package:flutter_bili/http/core/hi_error.dart';
+import 'package:hi_base/hi_state.dart';
 import 'package:flutter_bili/http/dao/favorite_dao.dart';
 import 'package:flutter_bili/http/dao/video_detail_dao.dart';
 import 'package:flutter_bili/model/video_detail_mo.dart';
@@ -19,13 +14,14 @@ import 'package:flutter_bili/widget/expandable_content.dart';
 import 'package:flutter_bili/widget/video_header.dart';
 import 'package:flutter_bili/widget/video_large_card.dart';
 import 'package:flutter_bili/widget/video_toolbar.dart';
-import 'package:flutter_bili/widget/video_view.dart';
 import 'package:flutter_bili/widget/navigation_bar.dart' as nav;
 import 'package:flutter_overlay/flutter_overlay.dart';
-
+import 'package:hi_barrage/hi_barrage.dart';
+import 'package:hi_net/core/hi_error.dart';
+import 'package:hi_video/video_view.dart';
 import '../http/dao/like_dao.dart';
 import '../model/video_model.dart';
-import '../utils/color.dart';
+import 'package:hi_base/color.dart';
 import '../widget/hi_tab.dart';
 
 class VideoDetailPage extends StatefulWidget {
@@ -234,7 +230,8 @@ class _VideoDetailPageState extends HiState<VideoDetailPage>
     if (_videoDetailMo == null) return;
     try {
       bool isFavorite = !(_videoDetailMo!.isFavorite ?? false);
-      var result = await FavoriteDao.favorite(_videoMo.vid, isFavorite);
+      bool isCancelFavorite = !isFavorite;
+      var result = await FavoriteDao.favorite(_videoMo.vid, isCancelFavorite);
       print(result);
       setState(() {
         _videoDetailMo!.isFavorite = isFavorite;

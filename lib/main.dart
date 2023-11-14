@@ -1,28 +1,18 @@
 import 'dart:async';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bili/db/hi_cache.dart';
-import 'package:flutter_bili/http/core/hi_error.dart';
-import 'package:flutter_bili/http/core/hi_net.dart';
 import 'package:flutter_bili/http/dao/login_dao.dart';
-import 'package:flutter_bili/http/request/notice_request.dart';
-import 'package:flutter_bili/http/request/test_request.dart';
 import 'package:flutter_bili/model/video_model.dart';
 import 'package:flutter_bili/navigator/bottom_navigator.dart';
 import 'package:flutter_bili/page/dark_mode_page.dart';
-import 'package:flutter_bili/page/home_page.dart';
 import 'package:flutter_bili/page/login_page.dart';
 import 'package:flutter_bili/page/notice_page.dart';
 import 'package:flutter_bili/page/registration_page.dart';
 import 'package:flutter_bili/page/video_detail_page.dart';
 import 'package:flutter_bili/provider/hi_provider.dart';
 import 'package:flutter_bili/provider/theme_provider.dart';
-import 'package:flutter_bili/utils/color.dart';
 import 'package:flutter_bili/utils/hi_defend.dart';
 import 'package:flutter_bili/utils/toast.dart';
-
-import 'model/result.dart';
+import 'package:hi_cache/hi_cache.dart';
 import 'navigator/hi_navigator.dart';
 import 'package:provider/provider.dart';
 

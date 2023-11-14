@@ -4,7 +4,6 @@ import 'package:flutter_bili/core/hi_base_tab_state.dart';
 import 'package:flutter_bili/model/home_mo.dart';
 import 'package:flutter_bili/model/notice_mo.dart';
 import 'package:flutter_bili/widget/notice_card.dart';
-
 import '../http/dao/notice_dao.dart';
 
 ///通知列表页

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bili/navigator/hi_navigator.dart';
-import 'package:flutter_bili/utils/format_util.dart';
+import 'package:hi_base/format_util.dart';
 import 'package:flutter_bili/utils/view_util.dart';
+import 'package:hi_base/view_util.dart';
 
 import '../model/home_mo.dart';
 import '../model/video_model.dart';

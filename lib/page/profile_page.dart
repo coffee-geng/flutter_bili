@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bili/core/hi_state.dart';
+import 'package:hi_base/hi_state.dart';
 import 'package:flutter_bili/http/dao/profile_dao.dart';
 import 'package:flutter_bili/provider/theme_provider.dart';
-import 'package:flutter_bili/utils/view_util.dart';
 import 'package:flutter_bili/widget/benefit_card.dart';
 import 'package:flutter_bili/widget/course_card.dart';
 import 'package:flutter_bili/widget/hi_banner.dart';
+import 'package:hi_base/view_util.dart';
+import 'package:hi_net/core/hi_error.dart';
 import 'package:provider/provider.dart';
-
-import '../http/core/hi_error.dart';
 import '../model/profile_mo.dart';
-import '../utils/color.dart';
+import 'package:hi_base/color.dart';
 import '../utils/toast.dart';
 import '../widget/dark_mode_item.dart';
 import '../widget/hi_blur.dart';

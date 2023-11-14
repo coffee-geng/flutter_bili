@@ -4,7 +4,7 @@ import 'package:flutter_bili/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:underline_indicator/underline_indicator.dart';
 
-import '../utils/color.dart';
+import 'package:hi_base/color.dart';
 import 'package:provider/provider.dart';
 
 class HiTab extends StatelessWidget {

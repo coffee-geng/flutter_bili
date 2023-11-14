@@ -5,7 +5,7 @@ import 'package:flutter_bili/page/favorite_page.dart';
 import 'package:flutter_bili/page/home_page.dart';
 import 'package:flutter_bili/page/profile_page.dart';
 import 'package:flutter_bili/page/ranking_page.dart';
-import 'package:flutter_bili/utils/color.dart';
+import 'package:hi_base/color.dart';
 
 class BottomNavigator extends StatefulWidget {
   const BottomNavigator({Key? key}) : super(key: key);

@@ -1,27 +1,20 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bili/core/hi_state.dart';
-import 'package:flutter_bili/http/core/hi_error.dart';
+import 'package:hi_base/hi_state.dart';
 import 'package:flutter_bili/navigator/hi_navigator.dart';
 import 'package:flutter_bili/page/home_tab_page.dart';
 import 'package:flutter_bili/page/profile_page.dart';
 import 'package:flutter_bili/page/video_detail_page.dart';
 import 'package:flutter_bili/provider/theme_provider.dart';
-import 'package:flutter_bili/utils/color.dart';
 import 'package:flutter_bili/utils/toast.dart';
 import 'package:flutter_bili/utils/view_util.dart';
 import 'package:flutter_bili/widget/hi_tab.dart';
 import 'package:flutter_bili/widget/loading_container.dart';
 import 'package:flutter_bili/widget/navigation_bar.dart' as nav;
+import 'package:hi_net/core/hi_error.dart';
 import 'package:provider/provider.dart';
-import 'package:underline_indicator/underline_indicator.dart';
-
 import '../http/dao/home_dao.dart';
 import '../model/home_mo.dart';
-import '../model/video_model.dart';
-import '../widget/navigation_bar.dart' as nav;
 
 class HomePage extends StatefulWidget {
   final ValueChanged<int>? onJumpTo;

@@ -1,7 +1,6 @@
 import 'package:flutter_bili/http/request/profile_request.dart';
-
+import 'package:hi_net/hi_net.dart';
 import '../../model/profile_mo.dart';
-import '../core/hi_net.dart';
 
 class ProfileDao {
   //https://api.devio.org/uapi/fa/profile

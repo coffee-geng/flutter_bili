@@ -154,7 +154,7 @@ packages:
     source: hosted
     version: "2.0.3"
   chewie:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: chewie
       sha256: ccfce3350ae9fd419cd336cdf3380f77a08e45171e1e3cb3d499d204de5e7ea8
@@ -234,7 +234,7 @@ packages:
     source: hosted
     version: "0.7.8"
   dio:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: dio
       sha256: "417e2a6f9d83ab396ec38ff4ea5da6c254da71e4db765ad737a42af6930140b7"
@@ -370,6 +370,41 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.3.1"
+  hi_barrage:
+    dependency: "direct main"
+    description:
+      path: "component/hi_barrage"
+      relative: true
+    source: path
+    version: "0.0.1"
+  hi_base:
+    dependency: "direct main"
+    description:
+      path: "component/hi_base"
+      relative: true
+    source: path
+    version: "0.0.1"
+  hi_cache:
+    dependency: "direct main"
+    description:
+      path: "component/hi_cache"
+      relative: true
+    source: path
+    version: "0.0.1"
+  hi_net:
+    dependency: "direct main"
+    description:
+      path: "component/hi_net"
+      relative: true
+    source: path
+    version: "0.0.1"
+  hi_video:
+    dependency: "direct main"
+    description:
+      path: "component/hi_video"
+      relative: true
+    source: path
+    version: "0.0.1"
   html:
     dependency: transitive
     description:
@@ -379,7 +414,7 @@ packages:
     source: hosted
     version: "0.15.4"
   http:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: http
       sha256: "759d1a329847dd0f39226c688d3e06a6b8679668e350e2891a6474f8b4bb8525"
@@ -408,7 +443,7 @@ packages:
     source: sdk
     version: "0.0.0"
   intl:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: intl
       sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
@@ -680,7 +715,7 @@ packages:
     source: hosted
     version: "0.27.7"
   shared_preferences:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: shared_preferences
       sha256: b7f41bad7e521d205998772545de63ff4e6c97714775902c199353f8bf1511ac
@@ -981,7 +1016,7 @@ packages:
     source: hosted
     version: "2.1.4"
   video_player:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: video_player
       sha256: "74b86e63529cf5885130c639d74cd2f9232e7c8a66cbecbddd1dcb9dbd060d1e"
@@ -1053,7 +1088,7 @@ packages:
     source: hosted
     version: "1.1.0"
   web_socket_channel:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: web_socket_channel
       sha256: d88238e5eac9a42bb43ca4e721edba3c08c6354d4a53063afaa568516217621b
